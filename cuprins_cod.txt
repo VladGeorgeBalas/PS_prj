@@ -1,0 +1,51 @@
+Balas Vlad-George
+
+Script-uri principare
+----------------------------------
+Faza1.m
+	Script-ul pentru Faza1, subpunctele a-e
+Faza2.m
+	Script-ul pentru Faza2, subpunctele a-c
+Faza3.m
+	Script-ul pentru Faza3
+Faza4.m
+	Script-ul pentru Faza4
+	
+Fisiere functii
+----------------------------------
+
+FNC
+----------------------------------
+	call: [B,A] = fnc(omega_p,omega_s,delta_p,delta_s,t_s, metoda)
+	
+	Functia BUT_FTI, modificate pentru Faza1, Subpunctul b si pentru Faza 4. Primeste aceasi parametrii ca functia BUT_FTI cu exceptia metodei care poate fi 'tustin' pentru a returna acelasi rezultat ca BUT_FTI, 'pseudo_tustin' pentru a returna rezultatul obtinut cu transformarea biliniara de la Faza1 Subpunctul b, sau 'faza_4' pentru a return filtru Butterworth cu aplitudinea 1 + Delta_p in G(w = 0).
+	
+GRAFIC
+----------------------------------
+	call: grafic(B, A, xlines, ylines, titlu)
+
+	Ploteaza caracteristica in frecventa(in dB) si faza, aplicand pe grafic linii verticale si orizontale la frecventele si amplitudinile mentionate prin 'xlines' si 'ylines' si punand titlu trimis prin 'titlu'
+	
+GRAFIC_ABS
+----------------------------------
+	call: grafic_abs(B, A, xlines, ylines, titlu)
+	
+	Ploteaza la fel ca functia GRAFIC caracteristica in frecventa si faza, dar caracteristica in frecventa nu este plotata in decibeli, ci in amplitudine. Este folosita la Faza1 Subpunctul e si la Faza 2.
+	
+TOL
+---------------------------------
+	call: ok = tol(b, a, Delta_p, Delta_s, omega_p, omega_s)
+	
+	Verifica incadrarea in tolerantele date a filtrului FTJ dat prin 'a' si 'b' prin metoda specifiicata in fisierul cu indicatii.
+	
+CRITERIU
+---------------------------------
+	call: [scor_cost_mediu, scor_calitate_mediu, scor_compus] = criteriu(b, a, omega_p, omega_s, Delta_p, Delta_s)
+	
+	Aplica criteriul de performanta pe care l-am propus pe un filtru FTJ trimis prin 'b' si 'a'. Returneaza scorul compus cat si scorurile de cost si calitate
+	
+BIN_OPT
+--------------------------------
+	call: [M, b, a] = bin_opt(Delta_p, Delta_s, omega_p, omega_s, Ts, M, metoda)
+	
+	Gaseste ordinul minim pentru un tip de filtru precizat si pentru specificatiile date. Parametrul 'metoda' primeste metoda cu care este gasita functia de transfer a filtrului, si poate fi 'fir1', 'firls', 'ellip', 'cheby1' sau 'cheby2'.
